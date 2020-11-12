@@ -67,8 +67,22 @@ async function getListingsRecursively(
   return [...results, ...nextResults]
 }
 
+async function getShopSections(
+  shop_id,
+  api_key,
+  etsyFetch
+) {
+  
+  const { results } = await etsyFetch(
+    `${ETSY_BASE_URL}/shops/${shop_id}/sections?api_key=${api_key}`
+  ).then(res => res.json())
+
+  return results
+}
+
 module.exports = {
   asyncForEach,
   createThrottledFetch,
   getListingsRecursively,
+  getShopSections,
 }
